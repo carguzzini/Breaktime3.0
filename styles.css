@@ -1,13 +1,13 @@
 .timer-container {
   font-family: sans-serif;
   background-color: burlywood;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 10px;
+  border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-   width: 400px;
+   width: 350px;
   margin: 0 auto;
   
 }
@@ -29,24 +29,28 @@
   margin-left:22px;
 }
 
-.input-container {
-  margin-bottom: 20px;
-  
+.input-container input[type="number"] {
+  font-size: 24px;
+  margin-bottom:20px;
+  margin-right: 20px;
+  align-items: center;
+  width: 70px;
 }
 
+
 .button-container button {
-  padding: 10px;
-  margin: 0 5px;
-  font-size: 15px;
+  padding: 20px;
+  margin: 0 15px;
+  font-size: 30px;
   background-color: #fff;
   color: #333;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
 }
 
 .button-container button:active {
-  transform: scale(0.95);
+  transform: scale(0.92);
 }
 
 footer {
@@ -55,10 +59,15 @@ footer {
   text-align: center;
   margin-top: 3px;
 }
+
 .work-label {
+  font-size:18px;
   color: green;
+  margin-left:30px;
 }
 
 .break-label {
+  font-size:18px;
   color: red;
+  margin-left:30px;
 }
