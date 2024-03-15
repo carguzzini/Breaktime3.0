@@ -5,6 +5,7 @@ let workDurationInput = document.getElementById('workDuration');
 let breakDurationInput = document.getElementById('breakDuration');
 let remainingTime = 0;
 let isCountdownRunning = false;
+let isWorkTime = true; // Variable to track whether it's work time or break time
 
 function toggleTimer() {
   if (isCountdownRunning) {
@@ -27,27 +28,28 @@ function startTimer() {
     clearInterval(currentTimer);
   }
 
-  remainingTime = workDuration * 60;
+  remainingTime = isWorkTime ? workDuration * 60 : breakDuration * 60; // Use ternary operator to determine the remaining time based on whether it's work time or break time
   displayCountdown();
-  updateTextColor('green');
+  updateTextColor(isWorkTime ? 'green' : 'red'); // Change text color based on work or break time
   isCountdownRunning = true;
 
-  // Start the timer
   currentTimer = setInterval(function() {
     if (remainingTime <= 0) {
       playAlarm();
       setTimeout(stopAlarm, 5000); // Sound the alarm for 5 seconds
-      remainingTime = breakDuration * 60; // Display the countdown for the break
+
+      // Switch between work time and break time
+      isWorkTime = !isWorkTime;
+      remainingTime = isWorkTime ? workDuration * 60 : breakDuration * 60; // Update remaining time based on whether it's work time or break time
       displayCountdown();
-      updateTextColor('red');
+      updateTextColor(isWorkTime ? 'green' : 'red'); // Change text color based on work or break time
     } else {
       remainingTime--;
       displayCountdown();
     }
   }, 1000);
 
-  // Update the button text to "Stop"
-  document.getElementById('toggleButton').textContent = "Stop";
+  document.getElementById('toggleButton').textContent = "Stop"; // Update button text to "Stop"
 }
 
 function stopTimer() {
@@ -56,8 +58,7 @@ function stopTimer() {
   currentTimer = null;
   isCountdownRunning = false;
 
-  // Update the button text to "Start"
-  document.getElementById('toggleButton').textContent = "Start";
+  document.getElementById('toggleButton').textContent = "Start"; // Update button text to "Start"
 }
 
 function resetTimer() {
@@ -68,12 +69,11 @@ function resetTimer() {
 }
 
 function playAlarm() {
-  alarm.play();
+  // You can use alternative methods to produce sound here
 }
 
 function stopAlarm() {
-  alarm.pause();
-  alarm.currentTime = 0;
+  // You can use alternative methods to stop the sound here
 }
 
 function displayCountdown() {
@@ -82,10 +82,10 @@ function displayCountdown() {
   countdownElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }
 
-
 function updateTextColor(color) {
   countdownElement.style.color = color;
 }
+
 function displayCurrentTime() {
   let now = new Date();
   let hours = now.getHours();
